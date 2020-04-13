@@ -33,20 +33,23 @@ int main(void) {
 		if (tempA == 1 || tempA == 2) {
 			tempC = 0x60; // PC5 and lowfuel (PC6)
 		}
-		if (tempA == 3 || tempA == 4) {
+		else if (tempA == 3 || tempA == 4) {
 			tempC = 0x70; // PC5-PC4 and low fuel (PC6)
 		}
-		if (tempA == 5 || tempA == 6) {
+		else if (tempA == 5 || tempA == 6) {
 			tempC = 0x38; // PC5-PC3
 		}
-		if (tempA >= 7 && tempA <= 9) {
+		else if (tempA >= 7 && tempA <= 9) {
 			tempC = 0x3C; // PC5 - PC2
 		}
-		if (tempA >= 10 && tempA <= 12) {
+		else if (tempA >= 10 && tempA <= 12) {
 			tempC = 0x3E; // PC5 - PC1
 		}
-		if (tempA >= 13 && tempA <= 15) {
+		else if (tempA >= 13 && tempA <= 15) {
 			tempC = 0x3F; // PC5 - PC0
+		}
+		else {
+			tempC = 0x00;
 		}
 
 		PORTC = tempC; //set PORTC to tempC
