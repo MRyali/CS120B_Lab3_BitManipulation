@@ -31,10 +31,12 @@ int main(void) {
 		tempC = 0x00;
 
 		if (tempA == 1 || tempA == 2) {
-			tempC = 0x60; // PC5 and lowfuel (PC6)
+			tempC = 0x20; // PC5
+			tempC = tempC | 0x40; //low fuel (PC6)
 		}
 		else if (tempA == 3 || tempA == 4) {
-			tempC = 0x70; // PC5-PC4 and low fuel (PC6)
+			tempC = 0x30; // PC5-PC4
+			tempC = tempC | 0x40; //low fuel (PC6)
 		}
 		else if (tempA == 5 || tempA == 6) {
 			tempC = 0x38; // PC5-PC3
