@@ -20,50 +20,34 @@ unsigned char getBit(unsigned char val, unsigned char k) {
 
 
 int main(void) {
-	DDRA = 0x00; PORTA = 0xFF; //input
-	DDRC = 0xFF; PORTC = 0x00; //output
+	DDRB = 0xFE; PORTB = 0x01; //output for only bit 0
+	DDRD = 0x00; PORTD = 0xFF; //output
 
-	unsigned char tempA = 0x00; //temp val for A
-	unsigned char tempC = 0x00; //temp val for C
-    	unsigned char tempPA = 0x00; //temp val for PINA
+	unsigned char tempB = 0x00; //temp val for B
+	unsigned char tempD = 0x00; //temp val for D
+	unsigned short tempWeight = 0x0000; //9 bit value to hold weight value
+    	unsigned char tempAirbag = 0x00; //temp val for airbag
 	
 	while (1) {
-		tempA = PINA & 0x0F; //get first 4 bits
-		tempC = 0x00;
-		tempPA = PINA & 0x70; //make sure we only have bits 6-4
+		tempAirbag = 0x00; //temporary assignment
+		tempB = PINB & 0x01; //only need PB0
+		tempD = PIND; //need all of PD
+	
+		tempWeight = tempD; //PD7 - PD0
+		tempWeight = tempWeight << 1; //shift left to make space for PB0
+		tempWeight = tempWeight + tempB; //add PB0 to get the total weight
 
-		if (tempA == 1 || tempA == 2) {
-			tempC = 0x20; //PC5
-			tempC = tempC | 0x40; //low fuel
+		if (tempWeight >= 70) { //check if weight is greater than 70
+			tempAirbag = 0x02; //set PB1 to 1		
 		}
-		else if (tempA == 3 || tempA == 4) {
-			tempC = 0x30; // PC5-PC4
-			tempC = tempC | 0x40; //low fuel
-		}
-		else if (tempA == 5 || tempA == 6) {
-			tempC = 0x38; // PC5-PC3
-		}
-		else if (tempA >= 7 && tempA <= 9) {
-			tempC = 0x3C; // PC5 - PC2
-		}
-		else if (tempA >= 10 && tempA <= 12) {
-			tempC = 0x3E; // PC5 - PC1
-		}
-		else if (tempA >= 13 && tempA <= 15) {
-			tempC = 0x3F; // PC5 - PC0
-		}
+		else if (tempWeight > 5) { //check if weight is between 5 and 70
+			tempAirbag = 0x04; //set PB2 to 1
+		} 
 		else {
-			tempC = 0x00;
-			tempC = tempC | 0x40; //low fuel
+			tempAirbag = 0x00; //no passengers
 		}
 
-		tempPA = tempPA >> 4; //shift bits left 4 to put bits 5 and 4 at the start
-
-		if (tempPA == 3) { //check if bit 5 and 4 are 1 and bit 6 is zero
-			tempC = tempC | 0x80; //fasten seat belt
-		}
-
-		PORTC = tempC; //set PORTC to tempC
+		PORTB = tempAirbag; //set output
    	}
 	return 1;
 }

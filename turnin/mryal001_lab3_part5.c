@@ -20,8 +20,8 @@ unsigned char getBit(unsigned char val, unsigned char k) {
 
 
 int main(void) {
-	DDRB = 0xFF; PORTB = 0x00; //output for only bit 0
-	DDRD = 0xFF; PORTD = 0x00; //output
+	DDRB = 0xFE; PORTB = 0x01; //output for only bit 0
+	DDRD = 0x00; PORTD = 0xFF; //input
 
 	unsigned char tempB = 0x00; //temp val for B
 	unsigned char tempD = 0x00; //temp val for D
