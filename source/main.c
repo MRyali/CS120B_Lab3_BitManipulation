@@ -28,7 +28,7 @@ int main(void) {
     	unsigned char tempPA = 0x00; //temp val for PINA
 	
 	while (1) {
-		tempA = PINA;
+		tempA = PINA & 0x0F; //get first 4 bits
 		tempC = 0x00;
 		tempPA = PINA & 0x70; //make sure we only have bits 6-4
 
