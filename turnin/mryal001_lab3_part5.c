@@ -32,7 +32,7 @@ int main(void) {
 		tempD = PIND; //need all of PD
 		tempAirbag = 0x00; 
 
-		if ((tempD >= 70 && tempB == 0) || (tempD >= 69 && tempB == 1) { //check if weight is greater than 70
+		if ((tempD >= 70 && tempB == 0) || (tempD >= 69 && tempB == 1)) { //check if weight is greater than 70
 			tempAirbag = 0x02; //set PB1 to 1		
 		}
 		else if ((tempD > 5 && tempB == 0) || (tempD > 4 && tempB == 0)) { //check if weight is between 5 and 70
