@@ -20,7 +20,7 @@ unsigned char getBit(unsigned char val, unsigned char k) {
 
 
 int main(void) {
-	DDRB = 0xFE; PORTB = 0x01; //output for only bit 0
+	DDRB = 0xFF; PORTB = 0x00; //output for only bit 0
 	DDRD = 0xFF; PORTD = 0x00; //output
 
 	unsigned char tempB = 0x00; //temp val for B
@@ -35,7 +35,7 @@ int main(void) {
 		if ((tempD >= 70 && tempB == 0) || (tempD >= 69 && tempB == 1)) { //check if weight is greater than 70
 			tempAirbag = 0x02; //set PB1 to 1		
 		}
-		else if ((tempD > 5 && tempB == 0) || (tempD > 4 && tempB == 0)) { //check if weight is between 5 and 70
+		else if ((tempD > 5 && tempB == 0) || (tempD > 4 && tempB == 1)) { //check if weight is between 5 and 70
 			tempAirbag = 0x04; //set PB2 to 1
 		}
 		else {
