@@ -25,12 +25,12 @@ int main(void) {
 
 	unsigned char tempA = 0x00; //temp val for A
 	unsigned char tempC = 0x00; //temp val for C
-    	unsigned char tempPINA = 0x00; //temp val for PINA
+    	unsigned char tempPA = 0x00; //temp val for PINA
 	
 	while (1) {
-		tempA = PINA;
+		tempA = PINA & 0x0F; //get only first 4 bits
 		tempC = 0x00;
-		tempPINA = PINA & 0x70; //makes sure we only store bits 6-4
+		tempPA = PINA & 0x70; //makes sure we only store bits 6-4
 
 		if (tempA == 1 || tempA == 2) {
 			tempC = 0x20; //PC5
@@ -57,9 +57,9 @@ int main(void) {
 			tempC = tempC | 0x40; //low fuel
 		}
 
-		tempPINA = tempPINA >> 4; //shift bits right 4 to put bits 5 and 4 at the start
+		tempPA = tempPA >> 4; //shift bits right 4 to put bits 5 and 4 at the start
 
-		if (tempPINA == 3) { //check if bit 5 and 4 are 1 and bit 6 is zero
+		if (tempPA == 3) { //check if bit 5 and 4 are 1 and bit 6 is zero
 			tempC = tempC | 0x80; //fasten seat belt
 		}
 
