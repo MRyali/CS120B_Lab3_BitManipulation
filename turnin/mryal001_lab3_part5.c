@@ -20,7 +20,7 @@ unsigned char getBit(unsigned char val, unsigned char k) {
 
 
 int main(void) {
-	DDRB = 0xFE; PORTB = 0x01; //output for only bit 0
+	DDRB = 0xFF; PORTB = 0x00; //output for only bit 0
 	DDRD = 0xFF; PORTD = 0x00; //output
 
 	unsigned char tempB = 0x00; //temp val for B
@@ -42,7 +42,7 @@ int main(void) {
 			tempAirbag = 0x00; //no passengers
 		}
 
-		PORTB = tempB | tempAirbag; //set output
+		PORTB = tempAirbag; //set output
    	}
 	return 1;
 }
