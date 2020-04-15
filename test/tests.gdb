@@ -52,7 +52,7 @@ checkResult
 test "PINA: 0x03 => PORTC: 0xF0"
 setPINA 0x03
 continue 5
-expectPORTC 0xF0
+expectPORTC 0x70
 checkResult
 
 test "PINA: 0x04 => PORTC: 0x70"
@@ -125,6 +125,30 @@ test "PINA: 0x0F => PORTC: 0x3F"
 setPINA 0x0F
 continue 5
 expectPORTC 0x3F
+checkResult
+
+test "PINA: 0x11 => PORTC: 0x60"
+setPINA 0x11
+continue 5
+expectPORTC 0x60
+checkResult
+
+test "PINA: 0x25 => PORTC: 0x38"
+setPINA 0x25
+continue 5
+expectPORTC 0x38
+checkResult
+
+test "PINA: 0x47 => PORTC: 0x3C"
+setPINA 0x47
+continue 5
+expectPORTC 0x3C
+checkResult
+
+test "PINA: 0x3F => PORTC: 0xBF"
+setPINA 0x3F
+continue 5
+expectPORTC 0xBF
 checkResult
 
 # Report on how many tests passed/tests ran
