@@ -30,7 +30,7 @@ int main(void) {
 	while (1) {
 		tempA = PINA;
 		tempC = 0x00;
-		tempPINA = PINA & 0x70; //gets the values of bits 6-4 and stores in temp
+		tempPINA = PINA & 0x70; //makes sure we only store bits 6-4
 
 		if (tempA == 1 || tempA == 2) {
 			tempC = 0x20; //PC5
@@ -59,8 +59,8 @@ int main(void) {
 
 		tempPINA = tempPINA >> 4; //shift bits left 4 to put bits 5 and 4 at the start
 
-		if (tempA == 3) { //check if bit 5 and 4 are 1 and bit 6 is zero
-			tempC = tempC | 0x80; //fasten seat belt
+		if (tempA == 0x03) { //check if bit 5 and 4 are 1 and bit 6 is zero
+			tempC = tempPINA | 0x80; //fasten seat belt
 		}
 
 		PORTC = tempC; //set PORTC to tempC
