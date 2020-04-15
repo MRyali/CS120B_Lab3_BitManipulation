@@ -25,6 +25,7 @@ int main(void) {
 
 	unsigned char tempB = 0x00; //temp val for B
 	unsigned char tempD = 0x00; //temp val for D
+	unsigned short tempWeight = 0x0000; //9 bit value to hold weight value
     	unsigned char tempAirbag = 0x00; //temp val for airbag
 	
 	while (1) {
@@ -32,10 +33,14 @@ int main(void) {
 		tempD = PIND; //need all of PD
 		tempAirbag = 0x00; 
 
-		if ((tempD >= 70 && tempB == 0) || (tempD >= 69 && tempB == 1)) { //check if weight is greater than 70
+		tempWeight = tempD;
+		tempWeight = tempWeight << 1;
+		tempWeight = tempWeight + tempB;
+
+		if (tempWeight >= 70) { //check if weight is greater than 70
 			tempAirbag = 0x02; //set PB1 to 1		
 		}
-		else if ((tempD > 5 && tempB == 0) || (tempD > 4 && tempB == 1)) { //check if weight is between 5 and 70
+		else if (tempWeight > 5) { //check if weight is between 5 and 70
 			tempAirbag = 0x04; //set PB2 to 1
 		}
 		else {
