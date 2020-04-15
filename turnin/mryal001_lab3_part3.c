@@ -57,10 +57,10 @@ int main(void) {
 			tempC = tempC | 0x40; //low fuel
 		}
 
-		tempPINA = tempPINA >> 4; //shift bits left 4 to put bits 5 and 4 at the start
+		tempPINA = tempPINA >> 4; //shift bits right 4 to put bits 5 and 4 at the start
 
-		if (tempA == 3) { //check if bit 5 and 4 are 1 and bit 6 is zero
-			tempC = tempPINA | 0x80; //fasten seat belt
+		if (tempPINA == 3) { //check if bit 5 and 4 are 1 and bit 6 is zero
+			tempC = tempC | 0x80; //fasten seat belt
 		}
 
 		PORTC = tempC; //set PORTC to tempC
