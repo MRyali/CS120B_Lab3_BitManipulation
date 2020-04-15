@@ -55,12 +55,6 @@ int main(void) {
 			tempC = tempC | 0x40; // low fuel
 		}
 
-		/*
-		if (tempA <= 4) { //low fuel (PC6)
-			tempC = tempC | 0x40;
-		}
-		*/
-
 		PORTC = tempC; //set PORTC to tempC
    	}
 	return 1;
